@@ -1,0 +1,25 @@
+.skeleton-bg {
+  background: linear-gradient(270deg, #fff, #e7e7e7);
+  background-size: 400% 400% !important;
+  height: 20px;
+
+  -webkit-animation: WipeAnimation 1s ease infinite;
+  -moz-animation: WipeAnimation 1s ease infinite;
+  animation: WipeAnimation 1s ease infinite;
+}
+
+@-webkit-keyframes WipeAnimation {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@-moz-keyframes WipeAnimation {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes WipeAnimation {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}

@@ -1,0 +1,171 @@
+.mb-0 {
+  margin-bottom: 0px !important;
+}
+
+.mb-1 {
+  margin-bottom: 5px !important;
+}
+
+.mb-2 {
+  margin-bottom: 10px !important;
+}
+
+.mb-3 {
+  margin-bottom: 15px !important;
+}
+
+.w-25 {
+  width: 25% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-75 {
+  width: 75% !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+////////////////////////////////
+// Flex Row
+////////////////////////////////
+
+%flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+%flexRowCenter {
+  @extend %flexRow;
+  align-items: center;
+}
+
+%flexRowEnd {
+  @extend %flexRow;
+  align-items: end;
+  align-items: flex-end;
+}
+
+%flexRowBaseline {
+  @extend %flexRow;
+  align-items: baseline;
+}
+
+// Classes
+
+.flex-row {
+  @extend %flexRow;
+}
+
+.flex-row-center {
+  @extend %flexRowCenter;
+}
+
+.flex-row-end {
+  @extend %flexRowEnd;
+}
+
+.flex-row-baseline {
+  @extend %flexRowBaseline;
+}
+
+// Flex Row Align Center Justify Content
+.flex-row-center-between {
+  @extend %flexRowCenter;
+  justify-content: space-between;
+}
+
+.flex-row-center-end {
+  @extend %flexRowCenter;
+  justify-content: flex-end;
+}
+
+.flex-row-center-start {
+  @extend %flexRowCenter;
+  justify-content: start;
+}
+
+.flex-row-center-center {
+  @extend %flexRowCenter;
+  justify-content: center;
+}
+
+.flex-row-center-around {
+  @extend %flexRowCenter;
+  justify-content: space-around;
+}
+
+// Flex Row Align End Justify Content
+.flex-row-end-between {
+  @extend %flexRowEnd;
+  justify-content: space-between;
+}
+
+.flex-row-end-end {
+  @extend %flexRowEnd;
+  justify-content: end;
+  justify-content: flex-end;
+}
+
+.flex-row-end-start {
+  @extend %flexRowEnd;
+  justify-content: start;
+}
+
+// Flex Row Align Baseline Justify Content
+.flex-row-baseline-between {
+  @extend %flexRowBaseline;
+  justify-content: space-between;
+}
+
+.flex-row-baseline-end {
+  @extend %flexRowBaseline;
+  justify-content: end;
+  justify-content: flex-end;
+}
+
+.flex-row-baseline-start {
+  @extend %flexRowBaseline;
+  justify-content: start;
+}
+
+////////////////////////////////
+// Flex Column
+////////////////////////////////
+
+%flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+%flexColumnCenter {
+  @extend %flexColumn;
+  align-items: center;
+}
+
+%flexColumnEnd {
+  @extend %flexColumn;
+  align-items: end;
+}
+
+// Classes
+.flex-column {
+  @extend %flexColumn;
+}
+
+.flex-column-center {
+  @extend %flexColumnCenter;
+}
+
+.flex-column-center-center {
+  @extend %flexColumnCenter;
+  justify-content: center;
+}
+
+.flex-column-end {
+  @extend %flexColumnEnd;
+}

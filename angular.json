@@ -28,15 +28,33 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config",
+              "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/scss/app.scss"
             ],
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "testnet": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.testnet.ts"
+                }
+              ]
+            },
+            "mainnet": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mainnet.ts"
+                }
+              ]
+            },
+            "prod": {
               "budgets": [
                 {
                   "type": "initial",
@@ -96,10 +114,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config",
+              "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/scss/app.scss"
             ],
             "scripts": []
           }
