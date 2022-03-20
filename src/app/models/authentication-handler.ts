@@ -24,7 +24,10 @@ export class AuthenticationHandler {
   }
 
   public set accessToken(value: string) {
-    this._route.searchParams.append('ACCESS_TOKEN', value);
+    if (this._route) {
+      this._route.searchParams.append('ACCESS_TOKEN', value);
+    }
+
     this._accessToken = value;
   }
 

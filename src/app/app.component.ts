@@ -80,9 +80,8 @@ export class AppComponent implements OnInit, OnDestroy {
       if (isRedirect) window.location.href = route.href;
       else if (isCallback) await this._authApiService.callback(route.href, callbackPayload).toPromise();
 
-      // Todo: Maybe remove QR, notify user, kill socket
-      // this._stopHubConnection();
-      // this.subscription.unsubscribe();
+      this._stopHubConnection();
+      this.subscription.unsubscribe();
     });
   }
 

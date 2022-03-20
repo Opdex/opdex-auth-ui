@@ -69,5 +69,7 @@ export enum Icons {
     pledge = 'how_to_vote',
     lineChart = 'show_chart',
     barChart = 'graphic_eq',
-    network = 'languages'
+    network = 'languages',
+    visible = 'visibility',
+    hidden = 'visibility_off'
 }

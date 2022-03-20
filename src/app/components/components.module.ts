@@ -17,11 +17,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 // Components
 import { QrCodeComponent } from './qr-code/qr-code.component';
 import { QrExpirationComponent } from './qr-expiration/qr-expiration.component';
+import { SecretComponent } from './secret/secret.component';
 
 @NgModule({
   declarations: [
     QrCodeComponent,
-    QrExpirationComponent
+    QrExpirationComponent,
+    SecretComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { QrExpirationComponent } from './qr-expiration/qr-expiration.component';
     MatProgressBarModule,
     ClipboardModule,
     QrCodeComponent,
-    QrExpirationComponent
+    QrExpirationComponent,
+    SecretComponent
   ]
 })
 export class ComponentsModule { }
