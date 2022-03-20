@@ -1,36 +1,38 @@
-<section id="auth" class="header-section tx-bg flex-row-center-center">
-  <mat-card class="info">
-    <p class="mb-0">
-      By connecting a wallet, you acknowledge that you have read, understand and agree to Opdex Inc.'s
-      <a class="no-decoration b-400" href="https://opdex.com/assets/opdex-platform-ui-terms-of-use.pdf" target="_blank" rel="noopener">Terms of Use</a>.
-    </p>
-  </mat-card>
-
-  <mat-card>
-    <div class="flex-row-center-center mb-3 mt-2">
-      <img src="/assets/logo-light-blue.png" alt="Opdex Logo" class="logo mr-1">
-      <h1 class="mb-0">Connect</h1>
+<section id="auth">
+  <div class="auth-container">
+    <div class="card info">
+      <p class="mb-0">
+        By connecting a wallet, you acknowledge that you have read, understand and agree to Opdex Inc.'s
+        <a class="no-decoration b-400" href="https://opdex.com/assets/opdex-platform-ui-terms-of-use.pdf" target="_blank" rel="noopener">Terms of Use</a>.
+      </p>
     </div>
 
-    <ng-container *ngIf="!reconnecting; else connecting">
-      <p class="text-center">Scan or copy the QR code using a compatible Cirrus wallet to login.</p>
+    <div class="card">
+      <div class="flex-row-center-center mb-3 mt-2">
+        <img src="/assets/logo-light-blue.png" alt="Opdex Logo" class="logo mr-1">
+        <h1 class="mb-0">Connect</h1>
+      </div>
 
-      <opdex-qr-code [data]="stratisId?.stratisId"></opdex-qr-code>
+      <ng-container *ngIf="!reconnecting; else connecting">
+        <p class="text-center">Scan or copy the QR code using a compatible Cirrus wallet to login.</p>
 
-      <opdex-qr-expiration [timeRemaining]="stratisId?.timeRemaining"></opdex-qr-expiration>
-    </ng-container>
+        <opdex-qr-code [data]="stratisId?.stratisId"></opdex-qr-code>
 
-    <ng-template #connecting>
-      <p class="text-center">Reconnecting, please wait...</p>
+        <opdex-qr-expiration [timeRemaining]="stratisId?.timeRemaining"></opdex-qr-expiration>
+      </ng-container>
 
-      <mat-progress-bar color="primary" mode="query"></mat-progress-bar>
-    </ng-template>
-  </mat-card>
+      <ng-template #connecting>
+        <p class="text-center">Reconnecting, please wait...</p>
 
-  <mat-card *ngIf="!authenticationHandler?.isRedirect &&
-                   !authenticationHandler?.isCallback &&
-                    authenticationHandler.accessToken">
-    <p>Access Token</p>
-    <small style="overflow-wrap: anywhere;">{{authenticationHandler.accessToken}}</small>
-  </mat-card>
+        <mat-progress-bar color="primary" mode="query"></mat-progress-bar>
+      </ng-template>
+    </div>
+
+    <div class="card" *ngIf="!authenticationHandler?.isRedirect &&
+                             !authenticationHandler?.isCallback &&
+                              authenticationHandler.accessToken">
+      <p>Access Token</p>
+      <small style="overflow-wrap: anywhere;">{{authenticationHandler.accessToken}}</small>
+    </div>
+  </div>
 </section>

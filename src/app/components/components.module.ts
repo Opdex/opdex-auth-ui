@@ -9,7 +9,6 @@ import { QrCodeModule } from 'ng-qrcode';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
 // Material Imports
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,7 +25,6 @@ import { QrExpirationComponent } from './qr-expiration/qr-expiration.component';
   ],
   imports: [
     CommonModule,
-    MatCardModule,
     MatIconModule,
     MatTooltipModule,
     MatButtonModule,
@@ -37,7 +35,6 @@ import { QrExpirationComponent } from './qr-expiration/qr-expiration.component';
   exports: [
     MatIconModule,
     MatButtonModule,
-    MatCardModule,
     MatProgressBarModule,
     ClipboardModule,
     QrCodeComponent,

@@ -58,16 +58,12 @@ export class StratisId {
     this._connectionId = connectionId;
     this._stratisId = stratisId;
     this._callbackUrl = new URL(this.stratisId.replace('sid:', 'https://'));
-    // Todo: Can URL accept this?
     this._webSidUrl = new URL(this.stratisId.replace('sid:', 'web+sid://'));
-
-    console.log(this._webSidUrl)
 
     const expiration = parseInt(this._callbackUrl.searchParams.get('exp'));
     this._expirationTime = new Date(expiration * 1000).getTime();
     this._expirationLength = (this._expirationTime - new Date().getTime()) / 1000;
 
-    // Expiration
     this.refreshTimeRemaining();
   }
 

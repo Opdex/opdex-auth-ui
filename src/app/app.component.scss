@@ -2,25 +2,20 @@
 
 #auth {
   min-height: 100vh;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 0 10px;
   display: flex;
-  flex-direction: column;
-  padding: 0px 10px;
-  background-image: url('/assets/Bg1@2x.png') !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: bottom !important;
-  background: #f4f4f4;
+  flex-wrap: wrap;
+  align-items: center;
 
-  mat-card {
+  .card {
     display: block;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    border-radius: 10px !important;
+    flex-basis: 100%;
+    padding: 15px;
+    border-radius: 10px;
     margin-bottom: 15px;
-    box-shadow: none !important;
-    border: none !important;
-    background: #fff !important;
+    background: #fff;
 
     &.info {
       background: rgba($blue-primary, .2) !important;
