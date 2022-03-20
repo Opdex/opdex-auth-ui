@@ -21,28 +21,18 @@
       <ng-container *ngIf="!authenticationHandler?.accessToken; else authenticated">
         <ng-container *ngIf="!reconnecting; else connecting">
           <p class="text-center">Scan or copy the QR code using a compatible Cirrus wallet to login.</p>
-
-          <opdex-qr-code
-            [data]="stratisId?.stratisId">
-          </opdex-qr-code>
-
-          <opdex-qr-expiration
-            [timeRemaining]="stratisId?.timeRemaining">
-          </opdex-qr-expiration>
+          <opdex-qr-code [data]="stratisId?.stratisId"></opdex-qr-code>
+          <opdex-qr-expiration [timeRemaining]="stratisId?.timeRemaining"></opdex-qr-expiration>
         </ng-container>
 
         <ng-template #connecting>
           <p class="text-center">Reconnecting, please wait...</p>
-
-          <mat-progress-bar
-            color="primary"
-            mode="query">
-          </mat-progress-bar>
+          <mat-progress-bar color="primary" mode="query"></mat-progress-bar>
         </ng-template>
       </ng-container>
 
       <ng-template #authenticated>
-        <p class="text-center">Keep this in a safe place, it will not be shown again.</p>
+        <p class="text-center">Keep secrets in a safe place, they will never be shown again.</p>
 
         <opdex-secret
           label="Access Token"

@@ -2,9 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import { Subscription, timer } from 'rxjs';
+import { Subscription, take, timer } from 'rxjs';
 import { AuthenticationHandler } from './models/authentication-handler';
-import { Icons } from './models/icons';
 import { StratisId } from './models/stratis-id';
 import { AuthApiService } from './services/api/auth-api.service';
 import { EnvironmentsService } from './services/utility/environments.service';
@@ -19,7 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
   stratisId: StratisId;
   authenticationHandler: AuthenticationHandler;
   reconnecting: boolean;
-  icons = Icons;
   subscription = new Subscription();
 
   constructor(
@@ -34,19 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.connectToSignalR();
-
-    this.subscription.add(
-      timer(0, 1000)
-      .subscribe(async _ => {
-        if (!this.stratisId) return;
-
-        if (this.stratisId.timeRemaining.isExpired) await this._getStratisId();
-        else this.stratisId.refreshTimeRemaining();
-      }));
-  }
-
-  private async connectToSignalR(): Promise<void> {
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(`${this._environmentService.apiUrl}/socket`)
       .configureLogging(LogLevel.Error)
@@ -60,6 +45,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
     await this.hubConnection.start();
     await this._getStratisId();
+
+    this.subscription.add(
+      timer(0, 1000)
+      .subscribe(async _ => {
+        if (!this.stratisId) return;
+
+        if (this.stratisId.timeRemaining.isExpired) await this._getStratisId();
+        else this.stratisId.refreshTimeRemaining();
+      }));
   }
 
   private async _getStratisId(): Promise<void> {
@@ -78,10 +72,11 @@ export class AppComponent implements OnInit, OnDestroy {
       const { route, isRedirect, isCallback, callbackPayload } = this.authenticationHandler;
 
       if (isRedirect) window.location.href = route.href;
-      else if (isCallback) await this._authApiService.callback(route.href, callbackPayload).toPromise();
-
-      this._stopHubConnection();
-      this.subscription.unsubscribe();
+      else if (isCallback) {
+        this._authApiService.callback(route.href, callbackPayload)
+        .pipe(take(1))
+        .subscribe();
+      }
     });
   }
 
@@ -103,12 +98,12 @@ export class AppComponent implements OnInit, OnDestroy {
   private async _stopHubConnection(): Promise<void> {
     if (!this.hubConnection) return;
 
+    this.subscription.unsubscribe();
     await this.hubConnection.stop();
     this.hubConnection = null;
   }
 
   async ngOnDestroy() {
-    this.subscription.unsubscribe();
     await this._stopHubConnection();
   }
 }

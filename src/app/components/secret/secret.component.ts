@@ -13,6 +13,19 @@ export class SecretComponent {
   copied: boolean;
   icons = Icons;
 
+  get hiddenSecret(): string {
+    const disc = '&#8226;';
+    let secret = disc;
+    let count = 1;
+
+    while (count < 50) {
+      secret += disc;
+      count++;
+    }
+
+    return secret;
+  }
+
   copy(): void {
     this.copied = true;
     setTimeout(() => this.copied = false, 1000);
