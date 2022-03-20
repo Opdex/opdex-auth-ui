@@ -1,4 +1,3 @@
-import { OnChanges } from '@angular/core';
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
 import { Icons } from 'src/app/models/icons';
@@ -8,15 +7,17 @@ import { Icons } from 'src/app/models/icons';
   templateUrl: './qr-code.component.html',
   styleUrls: ['./qr-code.component.scss']
 })
-export class QrCodeComponent implements OnChanges {
+export class QrCodeComponent {
   @Input() data: string | object;
   copied: boolean;
   icons = Icons;
-  qr: string;
 
-  ngOnChanges() {
-    // Make sure the data is safe for QR codes
-    this.qr = typeof this.data === 'string' ? this.data : JSON.stringify(this.data);
+  public get qr(): string {
+    if (!!this.data === false) return '';
+
+    return typeof this.data === 'string'
+      ? this.data
+      : JSON.stringify(this.data);
   }
 
   copyHandler() {

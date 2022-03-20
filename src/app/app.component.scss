@@ -1,0 +1,33 @@
+@import 'src/scss/colors';
+
+#auth {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  background-image: url('/assets/Bg1@2x.png') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: bottom !important;
+  background: #f4f4f4;
+
+  mat-card {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px !important;
+    margin-bottom: 15px;
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+
+    &.info {
+      background: rgba($blue-primary, .2) !important;
+    }
+  }
+
+  .logo {
+    width: 40px;
+  }
+}

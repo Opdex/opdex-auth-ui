@@ -18,6 +18,10 @@ $fontConfig: (
 
 @include mat.core($fontConfig);
 
+.text-center {
+  text-align: center;
+}
+
 .b-300 {
   font-weight: 300;
 }

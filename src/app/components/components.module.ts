@@ -1,7 +1,9 @@
 // Angular Core Imports
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QrCodeComponent } from './qr-code/qr-code.component';
+
+// NPM Imports
+import { QrCodeModule } from 'ng-qrcode';
 
 // CDK Imports
 import { ClipboardModule } from '@angular/cdk/clipboard';
@@ -11,13 +13,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
-// Other Imports
-import { QrCodeModule } from 'ng-qrcode';
+// Components
+import { QrCodeComponent } from './qr-code/qr-code.component';
+import { QrExpirationComponent } from './qr-expiration/qr-expiration.component';
 
 @NgModule({
   declarations: [
-    QrCodeComponent
+    QrCodeComponent,
+    QrExpirationComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +30,7 @@ import { QrCodeModule } from 'ng-qrcode';
     MatIconModule,
     MatTooltipModule,
     MatButtonModule,
+    MatProgressBarModule,
     ClipboardModule,
     QrCodeModule
   ],
@@ -32,7 +38,10 @@ import { QrCodeModule } from 'ng-qrcode';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    QrCodeComponent
+    MatProgressBarModule,
+    ClipboardModule,
+    QrCodeComponent,
+    QrExpirationComponent
   ]
 })
 export class ComponentsModule { }
