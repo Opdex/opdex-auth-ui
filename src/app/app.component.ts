@@ -25,13 +25,32 @@ export class AppComponent implements OnInit, OnDestroy {
     private _activatedRoute: ActivatedRoute,
     private _environmentService: EnvironmentsService,
     private _authApiService: AuthApiService
-  ) {
+  ) { }
+
+  async ngOnInit(): Promise<void> {
+    // Set timeout allows Angular some time to populate route query params
+    setTimeout(async () => {
+      this._setAuthHandler();
+      await this._startHubConnection();
+    });
+
+    this.subscription.add(
+      timer(0, 1000)
+      .subscribe(async _ => {
+        if (!this.stratisId) return;
+
+        if (this.stratisId.timeRemaining.isExpired) await this._getStratisId();
+        else this.stratisId.refreshTimeRemaining();
+      }));
+  }
+
+  private _setAuthHandler(): void {
     const redirect = this._activatedRoute.snapshot.queryParamMap.get('REDIRECT');
     const callback = this._activatedRoute.snapshot.queryParamMap.get('CALLBACK');
     this.authenticationHandler = new AuthenticationHandler({redirect, callback});
   }
 
-  async ngOnInit(): Promise<void> {
+  private async _startHubConnection(): Promise<void> {
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(`${this._environmentService.apiUrl}/socket`)
       .configureLogging(LogLevel.Error)
@@ -45,15 +64,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     await this.hubConnection.start();
     await this._getStratisId();
-
-    this.subscription.add(
-      timer(0, 1000)
-      .subscribe(async _ => {
-        if (!this.stratisId) return;
-
-        if (this.stratisId.timeRemaining.isExpired) await this._getStratisId();
-        else this.stratisId.refreshTimeRemaining();
-      }));
   }
 
   private async _getStratisId(): Promise<void> {
@@ -103,7 +113,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.hubConnection = null;
   }
 
-  async ngOnDestroy() {
+  async ngOnDestroy(): Promise<void> {
     await this._stopHubConnection();
   }
 }

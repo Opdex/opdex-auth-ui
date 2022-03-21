@@ -21,10 +21,11 @@ export class EnvironmentsService {
     const isTestnet = window.location.href.includes('test-auth');
 
     let env: IEnvironment;
+    const { production, network, apiOverride } = environment;
 
-    if (!environment.production) {
-      env = this._find(environment.networkOverride);
-      env.apiUrl = environment.apiOverride;
+    if (!production) {
+      env = this._find(network);
+      if (apiOverride) env.apiUrl = apiOverride;
     }
     else if (isDevnet) env = this._find(Network.Devnet);
     else if (isTestnet) env = this._find(Network.Testnet);
