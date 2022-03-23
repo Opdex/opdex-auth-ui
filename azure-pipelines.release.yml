@@ -1,0 +1,25 @@
+parameters:
+- name: environment
+  type: string
+
+jobs:
+  - deployment: ${{ parameters.environment }}
+    displayName: 'Deploy Resources'
+    variables:
+      - group: '${{ parameters.environment }}-ui' # points to variable group in Azure DevOps
+    environment: ${{ parameters.environment }} # points to environments in Azure DevOps
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: AzureWebApp@1
+              inputs:
+                azureSubscription: $(azureSubscription)
+                appType: 'webApp'
+                appName: 'app-opdex-${{ parameters.environment }}-auth-app'
+                package: '$(Pipeline.Workspace)/$(ARTIFACT_NAME)/*.zip'
+                deploymentMethod: 'auto'
+                deployToSlotOrASE: true
+                slotName: 'staging'
+                appSettings: '-CommitHash $(Build.SourceVersion)'
+              displayName: Deploy to App Service
