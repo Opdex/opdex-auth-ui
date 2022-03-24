@@ -19,6 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   authenticationHandler: AuthenticationHandler;
   reconnecting: boolean;
   subscription = new Subscription();
+  terms = 'https://opdex.com/assets/opdex-platform-ui-terms-of-use.pdf';
 
   constructor(
     public sanitizer: DomSanitizer,
