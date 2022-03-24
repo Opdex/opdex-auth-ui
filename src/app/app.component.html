@@ -1,6 +1,6 @@
 <section id="auth">
   <div class="auth-container w-100">
-    <div class="card info">
+    <div class="card info mt-3">
       <p class="mb-0">
         By connecting a wallet, you acknowledge that you have read, understand and agree to Opdex Inc.'s
         <a class="no-decoration b-400"
@@ -10,15 +10,38 @@
       </p>
     </div>
 
+
     <div class="card">
-      <div class="flex-row-center-center mb-3 mt-2">
-        <img src="/assets/logo-light-blue.png" alt="Opdex Logo" class="logo">
-        <h1 class="mb-0">Connect</h1>
+      <div class="flex-row-center-between mb-3">
+        <div class="flex-row-center">
+          <mat-icon class="small mr-1 {{authenticationHandler?.route ? 'green' : 'orange'}}">{{icons.staking}}</mat-icon>
+          Access Request
+        </div>
+
+        <a class="flex-row-center" [attr.href]="authenticationHandler.route.origin" target="_blank" *ngIf="authenticationHandler?.route">
+          {{authenticationHandler?.route?.hostname}}
+          <mat-icon class="tiny ml-1">{{icons.externalLink}}</mat-icon>
+        </a>
+        <p class="mb-0 b-400" *ngIf="!authenticationHandler?.route">Unknown</p>
+      </div>
+
+      <p class="mb-0 b-400">Requested Permissions</p>
+
+      <ul class="mb-0 mt-0">
+        <li>Retrieve transactional quotes</li>
+      </ul>
+    </div>
+
+
+    <div class="card">
+      <div class="flex-row-center-center mb-2 mt-1">
+        <img src="/assets/logo-light-blue.png" alt="Opdex Logo" class="logo mr-1">
+        <h1 class="mb-0">Connect to Opdex</h1>
       </div>
 
       <ng-container *ngIf="!authenticationHandler?.accessToken; else authenticated">
+        <p class="text-center mb-3">Using a Cirrus compatible wallet, scan or copy the code to create a verifiable signature.</p>
         <ng-container *ngIf="!reconnecting; else connecting">
-          <p class="text-center">Scan or copy the QR code using a compatible Cirrus wallet to login.</p>
           <opdex-qr-code [data]="stratisId?.stratisId"></opdex-qr-code>
           <opdex-qr-expiration [timeRemaining]="stratisId?.timeRemaining"></opdex-qr-expiration>
         </ng-container>

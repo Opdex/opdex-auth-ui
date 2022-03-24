@@ -15,12 +15,11 @@
       [cdkCopyToClipboard]="qr"
       (cdkCopyToClipboardCopied)="copyHandler()"
       color="primary"
-      class="small">
+      class="tiny">
 
       Copy Code
 
-      <mat-icon
-        class="tiny ml-1">
+      <mat-icon class="ml-1">
         {{copied ? icons.check : icons.copy}}
       </mat-icon>
     </button>

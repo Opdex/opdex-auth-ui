@@ -71,5 +71,6 @@ export enum Icons {
     barChart = 'graphic_eq',
     network = 'languages',
     visible = 'visibility',
-    hidden = 'visibility_off'
+    hidden = 'visibility_off',
+    externalLink = 'open_in_new'
 }

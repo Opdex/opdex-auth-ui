@@ -20,6 +20,11 @@
     &.info {
       background: rgba($blue-primary, .2) !important;
     }
+
+    &.child {
+      background: #f4f4f4;
+
+    }
   }
 
   .logo {

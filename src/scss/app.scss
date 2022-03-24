@@ -85,6 +85,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  padding-inline-start: 30px;
+}
+
 @import 'font';
 @import 'button';
 @import 'icons';

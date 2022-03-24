@@ -80,6 +80,8 @@ button {
   }
 
   .mat-button-wrapper {
+    display: flex;
+    align-items: middle;
     flex: 1 !important;
   }
 

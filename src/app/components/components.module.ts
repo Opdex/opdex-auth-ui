@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatDividerModule } from '@angular/material/divider'
 
 // Components
 import { QrCodeComponent } from './qr-code/qr-code.component';
@@ -31,6 +32,7 @@ import { SecretComponent } from './secret/secret.component';
     MatTooltipModule,
     MatButtonModule,
     MatProgressBarModule,
+    MatDividerModule,
     ClipboardModule,
     QrCodeModule
   ],
@@ -38,6 +40,7 @@ import { SecretComponent } from './secret/secret.component';
     MatIconModule,
     MatButtonModule,
     MatProgressBarModule,
+    MatDividerModule,
     ClipboardModule,
     QrCodeComponent,
     QrExpirationComponent,

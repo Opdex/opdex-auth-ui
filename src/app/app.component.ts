@@ -1,3 +1,4 @@
+import { Icons } from 'src/app/models/icons';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   reconnecting: boolean;
   subscription = new Subscription();
   terms = 'https://opdex.com/assets/opdex-platform-ui-terms-of-use.pdf';
+  icons = Icons;
 
   constructor(
     public sanitizer: DomSanitizer,
