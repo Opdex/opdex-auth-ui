@@ -4,23 +4,23 @@ Opdex Auth UI repository. Angular with Typescript styled with Material and SCSS 
 
 ## Usage
 
-1. Redirect users to `https://auth.opdex.com` with an appended `REDIRECT` or `CALLBACK` url.
+1. Redirect users to `https://auth.opdex.com` with an appended `redirect` or `callback` url.
 
 ```
 # Example
-https://auth.opdex.com?REDIRECT=https://app.opdex.com/auth
+https://auth.opdex.com?redirect=https://app.opdex.com/auth
 ```
 
 2. Users retrieve and sign provided Stratis Id message.
 
-3. Successful message signature validations will push an `Access_Token` and make the redirect or callback to the referrer.
+3. Successful message signature validations will push an `access_code` and make the redirect or callback to the referrer.
 
 ```
 # Example Redirection
-window.location.href = https://app.opdex.com/auth?ACCESS_TOKEN={SomeAccessToken}
+window.location.href = https://app.opdex.com/auth?access_code={SomeAccessCode}
 
 # Example Callback
-POST('https://app.opdex.com/auth?ACCESS_TOKEN={SomeAccessToken}');
+POST('https://app.opdex.com/auth?access_code={SomeAccessCode}');
 ```
 
 ## Contribute
