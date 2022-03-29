@@ -63,7 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.hubConnection.onclose(_ => console.log('closing connection'));
     this.hubConnection.onreconnecting(_ => this.reconnecting = true);
     this.hubConnection.onreconnected(async (connectionId: string) => await this._onReconnected(connectionId));
-    this.hubConnection.on('OnAuthenticated', async (token: string) => await this._onAuthenticated(token));
+    this.hubConnection.on('OnAuthenticated', async (accessCode: string) => await this._onAuthenticated(accessCode));
 
     await this.hubConnection.start();
     await this._getStratisId();
@@ -76,12 +76,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.stratisId = new StratisId(this.hubConnection.connectionId, stratisId);
   }
 
-  private async _onAuthenticated(token: string): Promise<void> {
+  private async _onAuthenticated(accessCode: string): Promise<void> {
     // Set timeout to allow _onReconnected to finish if necessary before closing the connection
     setTimeout(async () => {
       await this._stopHubConnection();
 
-      this.authenticationHandler.accessToken = token;
+      this.authenticationHandler.accessCode = accessCode;
       const { route, isRedirect, isCallback, callbackPayload } = this.authenticationHandler;
 
       if (isRedirect) window.location.href = route.href;

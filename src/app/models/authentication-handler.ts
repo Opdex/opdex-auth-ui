@@ -12,7 +12,7 @@ export interface IAuthenticationHandlerOptions {
 export class AuthenticationHandler {
   private _action: AuthenticationHandlerActions;
   private _route: URL;
-  private _accessToken: string;
+  private _accessCode: string;
   private _error: string;
 
   public get action(): AuthenticationHandlerActions {
@@ -23,16 +23,16 @@ export class AuthenticationHandler {
     return this._route;
   }
 
-  public set accessToken(value: string) {
+  public set accessCode(value: string) {
     if (this._route) {
-      this._route.searchParams.append('ACCESS_TOKEN', value);
+      this._route.searchParams.append('access_code', value);
     }
 
-    this._accessToken = value;
+    this._accessCode = value;
   }
 
-  public get accessToken(): string {
-    return this._accessToken;
+  public get accessCode(): string {
+    return this._accessCode;
   }
 
   public get error(): string {
@@ -48,7 +48,7 @@ export class AuthenticationHandler {
   }
 
   public get callbackPayload(): any {
-    return { accessToken: this._accessToken }
+    return { accessCode: this._accessCode }
   }
 
   constructor(options?: IAuthenticationHandlerOptions) {
