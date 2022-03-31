@@ -7,6 +7,7 @@ export enum AuthenticationHandlerActions {
 export interface IAuthenticationHandlerOptions {
   redirect?: string;
   callback?: string;
+  state?: string;
 }
 
 export class AuthenticationHandler {
@@ -52,17 +53,27 @@ export class AuthenticationHandler {
   }
 
   constructor(options?: IAuthenticationHandlerOptions) {
+    let route: URL;
+
     // Currently prioritizes redirects over callbacks, perhaps an app wants to do both?
     // Should we allow both? If so, should we still append ?ACCESS_TOKEN=xxx to the redirect URL?
     try {
       if (options?.redirect) {
         this._action = AuthenticationHandlerActions.redirect;
-        this._route = new URL(options.redirect);
+        route = new URL(options.redirect);
       } else if (options?.callback) {
         this._action = AuthenticationHandlerActions.post;
-        this._route = new URL(options.callback);
+        route = new URL(options.callback);
       } else {
         this._action = AuthenticationHandlerActions.show;
+      }
+
+      if (route && options?.state) {
+        route.searchParams.append('state', options.state);
+      }
+
+      if (route) {
+        this._route = route;
       }
     } catch {
       const urlType = this._action === AuthenticationHandlerActions.redirect ? 'redirect' : 'callback';

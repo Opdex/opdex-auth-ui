@@ -48,9 +48,11 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   private _setAuthHandler(): void {
-    const redirect = this._activatedRoute.snapshot.queryParamMap.get('redirect');
-    const callback = this._activatedRoute.snapshot.queryParamMap.get('callback');
-    this.authenticationHandler = new AuthenticationHandler({redirect, callback});
+    this.authenticationHandler = new AuthenticationHandler({
+      redirect: this._activatedRoute.snapshot.queryParamMap.get('redirect_uri'),
+      callback: this._activatedRoute.snapshot.queryParamMap.get('state'),
+      state: this._activatedRoute.snapshot.queryParamMap.get('callback')
+    });
   }
 
   private async _startHubConnection(): Promise<void> {
