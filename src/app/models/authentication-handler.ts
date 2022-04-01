@@ -8,6 +8,7 @@ export interface IAuthenticationHandlerOptions {
   redirect?: string;
   callback?: string;
   state?: string;
+  stamp: string;
 }
 
 export class AuthenticationHandler {
@@ -15,6 +16,7 @@ export class AuthenticationHandler {
   private _route: URL;
   private _accessCode: string;
   private _error: string;
+  private _stamp: string;
 
   public get action(): AuthenticationHandlerActions {
     return this._action;
@@ -34,6 +36,10 @@ export class AuthenticationHandler {
 
   public get accessCode(): string {
     return this._accessCode;
+  }
+
+  public get stamp(): string {
+    return this._stamp;
   }
 
   public get error(): string {
@@ -75,6 +81,8 @@ export class AuthenticationHandler {
       if (route) {
         this._route = route;
       }
+
+      this._stamp = options.stamp;
     } catch {
       const urlType = this._action === AuthenticationHandlerActions.redirect ? 'redirect' : 'callback';
       this._error = `Invalid ${urlType} URL format.`;
