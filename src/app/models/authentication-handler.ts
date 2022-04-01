@@ -28,7 +28,7 @@ export class AuthenticationHandler {
 
   public set accessCode(value: string) {
     if (this._route) {
-      this._route.searchParams.append('access_code', value);
+      this._route.searchParams.append('code', value);
     }
 
     this._accessCode = value;
