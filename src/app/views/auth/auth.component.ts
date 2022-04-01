@@ -48,9 +48,12 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   private _setAuthHandler(): void {
-    const redirect = this._activatedRoute.snapshot.queryParamMap.get('redirect');
-    const callback = this._activatedRoute.snapshot.queryParamMap.get('callback');
-    this.authenticationHandler = new AuthenticationHandler({redirect, callback});
+    this.authenticationHandler = new AuthenticationHandler({
+      redirect: this._activatedRoute.snapshot.queryParamMap.get('redirect_uri'),
+      state: this._activatedRoute.snapshot.queryParamMap.get('state'),
+      stamp: this._activatedRoute.snapshot.queryParamMap.get('stamp'),
+      callback: this._activatedRoute.snapshot.queryParamMap.get('callback')
+    });
   }
 
   private async _startHubConnection(): Promise<void> {
@@ -72,7 +75,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   private async _getStratisId(): Promise<void> {
     if (!this.hubConnection) return;
 
-    const stratisId = await this.hubConnection.invoke('GetStratisId');
+    const stratisId = await this.hubConnection.invoke('GetStratisId', this.authenticationHandler.stamp);
     this.stratisId = new StratisId(this.hubConnection.connectionId, stratisId);
   }
 
