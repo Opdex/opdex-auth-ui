@@ -34,17 +34,20 @@ export class AuthComponent implements OnInit, OnDestroy {
     // Set timeout allows Angular some time to populate route query params
     setTimeout(async () => {
       this._setAuthHandler();
-      await this._startHubConnection();
+
+      if (this.authenticationHandler?.stamp) {
+        await this._startHubConnection();
+      }
     });
 
     this.subscription.add(
       timer(0, 1000)
-      .subscribe(async _ => {
-        if (!this.stratisId) return;
+        .subscribe(async _ => {
+          if (!this.stratisId) return;
 
-        if (this.stratisId.timeRemaining.isExpired) await this._getStratisId();
-        else this.stratisId.refreshTimeRemaining();
-      }));
+          if (this.stratisId.timeRemaining.isExpired) await this._getStratisId();
+          else this.stratisId.refreshTimeRemaining();
+        }));
   }
 
   private _setAuthHandler(): void {
@@ -68,8 +71,13 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.hubConnection.onreconnected(async (connectionId: string) => await this._onReconnected(connectionId));
     this.hubConnection.on('OnAuthenticated', async (accessCode: string) => await this._onAuthenticated(accessCode));
 
-    await this.hubConnection.start();
-    await this._getStratisId();
+    try {
+      await this.hubConnection.start();
+      await this._getStratisId();
+    } catch(error) {
+      console.error(error);
+      this.authenticationHandler = null;
+    }
   }
 
   private async _getStratisId(): Promise<void> {
