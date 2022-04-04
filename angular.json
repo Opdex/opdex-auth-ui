@@ -100,6 +100,12 @@
             },
             "development": {
               "browserTarget": "opdex-auth-ui:build:development"
+            },
+            "testnet": {
+              "browserTarget": "opdex-auth-ui:build:testnet"
+            },
+            "mainnet": {
+              "browserTarget": "opdex-auth-ui:build:mainnet"
             }
           },
           "defaultConfiguration": "development"

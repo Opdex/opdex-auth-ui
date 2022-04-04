@@ -1,3 +1,7 @@
+<div class="notification-banner purple flex-row-center pl-2 pt-1 pb-1 pr-2" *ngIf="network !== 'MAINNET'">
+  <mat-icon class="tiny mr-1">{{icons.network}}</mat-icon> <small>{{network}}</small>
+</div>
+
 <div class="background">
   <router-outlet></router-outlet>
 </div>
